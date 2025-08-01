@@ -19,6 +19,58 @@ body {
     transition: transform 0.3s;
 }
 
+/* Gift box states */
+.gift.locked {
+    opacity: 0.7;
+    filter: grayscale(30%);
+    cursor: not-allowed;
+}
+
+.gift.locked::before {
+    content: "🔒";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    z-index: 10;
+    animation: pulse 2s infinite;
+}
+
+.gift.unlocked {
+    opacity: 1;
+    filter: grayscale(0%);
+    cursor: pointer;
+}
+
+.gift.unlocked::before {
+    content: "🔓";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    z-index: 10;
+    animation: pulse 2s infinite;
+}
+
+.gift.opened {
+    opacity: 0.3;
+    filter: grayscale(50%);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.gift.opened::before {
+    content: "🎁";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    z-index: 10;
+}
+
 .gift-img {
     display: block;
     width: 100%;
@@ -43,8 +95,28 @@ body {
     overflow: hidden;
 }
 
-.gift:hover {
+.countdown-container.finished {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    animation: celebration 2s ease-in-out;
+}
+
+@keyframes celebration {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.2); }
+}
+
+.gift.unlocked:hover {
     transform: scale(1.05);
+}
+
+.gift.locked:hover {
+    transform: scale(1);
+    cursor: not-allowed;
 }
 
 .ribbon {
@@ -144,5 +216,204 @@ h1 {
     100% {
         transform: scaleX(1);
         opacity: 1;
+    }
+}
+
+/* Floating Images Styles */
+.floating-images {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: visible;
+}
+
+.floating-image {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    animation: floatAround 8s ease-in-out infinite;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: scale(0);
+    animation-delay: 0.5s;
+}
+
+.floating-image.show {
+    opacity: 1;
+    transform: scale(1);
+    animation: floatAround 8s ease-in-out infinite;
+}
+
+.floating-image:hover {
+    transform: scale(1.2);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.floating-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.image-glow {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3);
+    border-radius: 50%;
+    opacity: 0;
+    animation: imageGlow 3s ease-in-out infinite;
+    z-index: -1;
+}
+
+.floating-image:hover .image-glow {
+    opacity: 0.8;
+}
+
+/* Position and animation for each floating image */
+.floating-1 {
+    top: 15%;
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 10s;
+}
+
+.floating-2 {
+    top: 25%;
+    right: 15%;
+    animation-delay: 1.5s;
+    animation-duration: 12s;
+}
+
+.floating-3 {
+    top: 65%;
+    left: 12%;
+    animation-delay: 3s;
+    animation-duration: 9s;
+}
+
+.floating-4 {
+    bottom: 25%;
+    right: 20%;
+    animation-delay: 4.5s;
+    animation-duration: 11s;
+}
+
+.floating-5 {
+    top: 45%;
+    left: 20%;
+    animation-delay: 6s;
+    animation-duration: 13s;
+}
+
+.floating-6 {
+    bottom: 15%;
+    left: 30%;
+    animation-delay: 7.5s;
+    animation-duration: 10.5s;
+}
+
+/* Floating Animations */
+@keyframes floatAround {
+    0%, 100% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-20px) translateX(15px) rotate(5deg);
+    }
+    50% {
+        transform: translateY(-10px) translateX(-10px) rotate(-3deg);
+    }
+    75% {
+        transform: translateY(15px) translateX(20px) rotate(8deg);
+    }
+}
+
+@keyframes imageGlow {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes imageSparkle {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.4) rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive floating images */
+@media (max-width: 768px) {
+    .floating-image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .floating-1 { top: 10%; left: 5%; }
+    .floating-2 { top: 20%; right: 8%; }
+    .floating-3 { top: 60%; left: 8%; }
+    .floating-4 { bottom: 20%; right: 12%; }
+    .floating-5 { top: 40%; left: 15%; }
+    .floating-6 { bottom: 10%; left: 25%; }
+}
+
+@media (max-width: 480px) {
+    .floating-image {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* Responsive gift box states */
+@media (max-width: 768px) {
+    .gift.locked::before,
+    .gift.unlocked::before,
+    .gift.opened::before {
+        font-size: 20px;
+        top: -15px;
+    }
+    
+    .countdown-container.finished {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gift.locked::before,
+    .gift.unlocked::before,
+    .gift.opened::before {
+        font-size: 18px;
+        top: -12px;
+    }
+    
+    .countdown-container.finished {
+        padding: 15px;
     }
 }
