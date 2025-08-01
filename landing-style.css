@@ -10,12 +10,13 @@ body {
     background: linear-gradient(135deg, #ffd700 0%, #ff69b4 50%, #87ceeb 100%);
     min-height: 100vh;
     overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 clamp(10px, 2vw, 20px);
 }
 
 /* Header Styles */
@@ -34,7 +35,7 @@ body {
 
 .logo h2 {
     color: white;
-    font-size: 18px;
+    font-size: clamp(14px, 2vw, 18px);
     font-weight: 600;
     letter-spacing: 1px;
 }
@@ -95,7 +96,7 @@ body {
 .content-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: clamp(20px, 4vw, 40px);
     align-items: center;
     min-height: 70vh;
 }
@@ -113,11 +114,11 @@ body {
 .main-title {
     background: #7c3aed;
     color: white;
-    padding: 20px 30px;
+    padding: clamp(15px, 3vw, 20px) clamp(20px, 4vw, 30px);
     border-radius: 15px;
-    font-size: 32px;
+    font-size: clamp(1.5rem, 4vw, 32px);
     font-weight: 700;
-    margin-bottom: 15px;
+    margin-bottom: clamp(10px, 2vw, 15px);
     box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
     animation: slideInLeft 1s ease-out;
 }
@@ -125,9 +126,9 @@ body {
 .subtitle {
     background: #fce7f3;
     color: #7c3aed;
-    padding: 15px 25px;
+    padding: clamp(10px, 2vw, 15px) clamp(15px, 3vw, 25px);
     border-radius: 12px;
-    font-size: 20px;
+    font-size: clamp(1rem, 2.5vw, 20px);
     font-weight: 600;
     box-shadow: 0 4px 15px rgba(252, 231, 243, 0.5);
     animation: slideInLeft 1s ease-out 0.2s both;
@@ -153,9 +154,9 @@ body {
     background: linear-gradient(135deg, #ec4899, #f472b6);
     color: white;
     border: none;
-    padding: 15px 30px;
+    padding: clamp(12px, 2.5vw, 15px) clamp(20px, 4vw, 30px);
     border-radius: 25px;
-    font-size: 16px;
+    font-size: clamp(14px, 2vw, 16px);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -1353,5 +1354,215 @@ body {
     
     .play-icon {
         font-size: 14px;
+    }
+}
+
+/* Comprehensive Responsive Design */
+
+/* Large Desktop (1200px+) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .main-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+    }
+    
+    .browser-window {
+        transform: scale(1.1);
+    }
+    
+    .photo-frame {
+        width: 350px;
+        height: 250px;
+    }
+}
+
+/* Desktop (992px - 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+    
+    .main-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+    }
+    
+    .photo-frame {
+        width: 320px;
+        height: 230px;
+    }
+}
+
+/* Tablet Landscape (768px - 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+    .content-grid {
+        gap: clamp(15px, 3vw, 25px);
+    }
+    
+    .main-title {
+        font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    }
+    
+    .browser-window {
+        transform: scale(0.9);
+    }
+    
+    .photo-frame {
+        width: 300px;
+        height: 220px;
+    }
+}
+
+/* Mobile Landscape (576px - 767px) */
+@media (max-width: 767px) and (min-width: 576px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+        gap: clamp(20px, 4vw, 30px);
+    }
+    
+    .main-title {
+        font-size: clamp(1.5rem, 4vw, 28px);
+    }
+    
+    .subtitle {
+        font-size: clamp(0.9rem, 2.5vw, 18px);
+    }
+    
+    .browser-window {
+        transform: scale(0.8);
+    }
+    
+    .photo-frame {
+        width: clamp(250px, 70vw, 300px);
+        height: clamp(180px, 50vw, 220px);
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(10px, 2vw, 15px);
+    }
+}
+
+/* Mobile Portrait (375px - 575px) */
+@media (max-width: 575px) and (min-width: 375px) {
+    .container {
+        padding: 0 clamp(8px, 2vw, 15px);
+    }
+    
+    .main-title {
+        font-size: clamp(1.3rem, 4vw, 24px);
+        padding: clamp(10px, 2.5vw, 15px) clamp(15px, 3vw, 20px);
+    }
+    
+    .subtitle {
+        font-size: clamp(0.8rem, 2.5vw, 16px);
+        padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 20px);
+    }
+    
+    .browser-window {
+        width: clamp(180px, 80vw, 250px);
+        height: clamp(140px, 60vw, 200px);
+    }
+    
+    .photo-frame {
+        width: clamp(200px, 80vw, 280px);
+        height: clamp(150px, 60vw, 200px);
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(8px, 2vw, 12px);
+    }
+}
+
+/* Small Mobile (320px - 374px) */
+@media (max-width: 374px) {
+    .container {
+        padding: 0 8px;
+    }
+    
+    .main-title {
+        font-size: clamp(1.1rem, 4vw, 20px);
+        padding: 10px 12px;
+    }
+    
+    .subtitle {
+        font-size: clamp(0.7rem, 2.5vw, 14px);
+        padding: 8px 10px;
+    }
+    
+    .browser-window {
+        width: 160px;
+        height: 120px;
+    }
+    
+    .photo-frame {
+        width: clamp(160px, 85vw, 200px);
+        height: clamp(120px, 65vw, 150px);
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .photo-frame,
+    .gallery-image,
+    .gallery-video {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+    .cta-button:hover {
+        transform: none;
+    }
+    
+    .photo-frame:hover {
+        transform: rotate(-2deg) scale(1);
+    }
+    
+    .gallery-item:hover {
+        transform: none;
+    }
+    
+    .nav-btn:hover {
+        transform: none;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Landscape Orientation */
+@media (orientation: landscape) and (max-height: 500px) {
+    .main {
+        padding: 20px 0;
+    }
+    
+    .content-grid {
+        min-height: 60vh;
+    }
+    
+    .photo-frame {
+        width: clamp(150px, 40vw, 200px);
+        height: clamp(100px, 30vw, 150px);
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
     }
 } 
